@@ -38,8 +38,7 @@ select option:active {
   cursor: pointer;
 }
 
-.active {
-  background-color: var(--my-light);
+.topping-text {
   color: black;
 }
 

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +18,6 @@
   <script src="js/scripts.js"></script>
   <title>Pizza Parlor</title>
 </head>
-
 <body class="bg-light">
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
@@ -44,51 +42,84 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4">
         <div class="col mt-3">
           <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Cheese</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Pepperoni</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Sausage</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Hawaiian</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
+            <div class="card-body text-center">
               <h3 class="card-title">Buffalo Chicken</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
+              <p class="card-text">Toppings</p>
+              <ul class="list-group">
+                <li class="list-group-item bg-light topping-text">
+                  Parmesan
+                </li>
+                <li class="list-group-item bg-light topping-text">
+                  Chicken
+                </li>
+                <li class="list-group-item bg-light topping-text">
+                  Peppers
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col mt-3">
+          <div class="card bg-my-light">
+            <div class="card-body text-center">
+              <h3 class="card-title">Sausage</h3>
+              <p class="card-text">Toppings</p>
+              <ul class="list-group">
+                <li class="list-group-item bg-light topping-text">
+                  Parmesan
+                </li>
+                <li class="list-group-item bg-light topping-text">
+                  Pepperoni
+                </li>
+                <li class="list-group-item bg-light topping-text">
+                  Sausage
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col mt-3">
+          <div class="card bg-my-light">
+            <div class="card-body text-center">
+              <h3 class="card-title">Pepperoni</h3>
+              <p class="card-text">Toppings</p>
+              <ul class="list-group">
+                <li class="list-group-item bg-light topping-text">
+                  Parmesan
+                </li>
+                <li class="list-group-item bg-light topping-text">
+                  Pepperoni
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col mt-3">
+          <div class="card bg-my-light">
+            <div class="card-body text-center">
+              <h3 class="card-title">Hawaiian</h3>
+              <p class="card-text">Toppings</p>
+              <ul class="list-group">
+                <li class="list-group-item bg-light topping-text">
+                  Parmesan
+                </li>
+                <li class="list-group-item bg-light topping-text">
+                  Canadian Bacon
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col mt-3">
+          <div class="card bg-my-light">
+            <div class="card-body text-center">
+              <h3 class="card-title">Cheese</h3>
+              <p class="card-text">Toppings</p>
+              <ul class="list-group">
+                <li class="list-group-item bg-light topping-text">
+                  Parmesan
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -162,6 +193,18 @@
               Sausage
             </label>
           </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="Canadian Bacon">
+              Canadian Bacon
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="Peppers">
+              Peppers
+            </label>
+          </div>
           <br>
           <button type="button" id="order-btn" class="btn bg-my-light w-25">Order</button>
         </div>
@@ -169,5 +212,4 @@
     </div>
   </div>
 </body>
-
 </html>

@@ -1,5 +1,13 @@
+/* Global */
+:root {
+  --my-light: #e7e9eb;
+}
+
 /* Elements */
 
 
 /* Classes */
 
+.bg-my-light {
+  background-color: var(--my-light);
+}

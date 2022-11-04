@@ -25,7 +25,32 @@ Just download this repo and open up index.html in your browser of choice.
 
 ## Tests
 
+#### Describe: FlavorList()
+```
+Test: It should return an empty object to store flavors in
+Code: const fList = new FlavorList();
+Expected Output: FlavorList { flavors: {} }
+```
 
+#### Describe: Toppings()
+```
+Test: It should return an empty array and an array of valid toppings
+Code: const toppingVar = new Toppings();
+Expected Output: Toppings {list: [], validToppings: ["parmesan","pepperoni","pineapple","chicken","sausage","canadian_bacon","peppers","chicken"]}
+```
+
+```
+Test: It should return a filtered array and an array of valid toppings
+Code: const toppingVar = new Toppings(["a", "Pepperoni", "b", "Canadian Bacon", "c"]);
+Expected Output: Toppings {list: ["pepperoni", "canadian_bacon"], validToppings: ["parmesan","pepperoni","pineapple","chicken","sausage","canadian_bacon","peppers","chicken"]}
+```
+
+#### Describe: Flavor()
+```
+Test: It should return an empty object to store flavors in
+Code: const nFlavor = new Flavor();
+Expected Output: FlavorList { flavors: {} }
+```
 
 ## License info
 

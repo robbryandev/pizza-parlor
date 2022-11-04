@@ -1,14 +1,19 @@
 // Business
 
 function Toppings(topArray) {
-  this.validToppings = ["parmesan", "pepperoni", "pineapple", "chicken", "sausage", "canadian_bacon", "peppers", "chicken"];
   let topList = [];
-  topArray.forEach(function(top) {
-    const filterTop = String(top).trim().toLocaleLowerCase().replaceAll(" ", "_");
-    if (this.validToppings.includes(filterTop)) {
-      topList.push(filterTop);
-    };
-  });
+  this.validToppings = ["parmesan", "pepperoni", "pineapple", "chicken", "sausage", "canadian_bacon", "peppers", "chicken"];
+  if (topArray) {
+    if (Array(topArray).length > 0) {
+      let validRef = this.validToppings;
+      topArray.forEach(function(top) {
+      const filterTop = String(top).trim().toLocaleLowerCase().replaceAll(" ", "_");
+        if (validRef.includes(filterTop)) {
+          topList.push(filterTop);
+        };
+      });
+    }
+  }
   this.list = topList;
 }
 
@@ -23,57 +28,88 @@ FlavorList.prototype.addFlavor = function(flavorVar) {
 
 function Flavor(name, toppings) {
   this.name = name;
-  this.toppings = [...toppings.list]
-  this.validToppings = toppings.valid;
+  this.toppings = [];
+  this.validToppings = [];
+  if (toppings) {
+    this.toppings = [...toppings.list]
+    this.validToppings = toppings.validToppings;
+  } else {
+    let tmpTop = new Toppings();
+    this.toppings = [...tmpTop.list];
+    this.validToppings = tmpTop.validToppings;
+  }
 }
 
 Flavor.prototype.addTopping = function(topping) {
   const newTopping = String(topping).trim().toLocaleLowerCase().replaceAll(" ", "_");
   if (this.validToppings.includes(newTopping)) {
-    this.toppings.push(newTopping);
+    this.toppings.list.push(newTopping);
   }
+};
+
+function addPizzaTopping(flavorVar, topping) {
+  let newFlavorVar = flavorVar;
+  const newTopping = String(topping).trim().toLocaleLowerCase().replaceAll(" ", "_");
+  if (newFlavorVar.toppings.validToppings.includes(newTopping)) {
+    newFlavorVar.toppings.list.push(newTopping);
+  }
+  return newFlavorVar;
 };
 
 function Pizza(flavor, toppings, size) {
   this.name = flavor.name;
-  this.toppings = [...flavor.toppings].concat([...toppings.list]);
+  this.toppings = [...toppings];
   this.size = size;
-  this.price = (parseFloat(this.size) + this.toppings.length).toFixed(2);
+  let pSize;
+  switch (size) {
+    case "Small":
+      pSize = "12";
+      break;
+    case "Medium":
+      pSize = "15";
+      break;
+    case "Large":
+      pSize = "18";
+      break;
+    default:
+      pSize = "15";
+  }
+  this.price = (parseFloat(pSize) + this.toppings.length).toFixed(2);
 }
 
 function getFlavorList() {
   let fList = new FlavorList();
 
   const cheeseFlavor = new Flavor("Cheese");
-  cheeseFlavor.toppings = new Toppings([]);
+  cheeseFlavor.toppings = new Toppings();
   cheeseFlavor.addTopping("parmesan");
 
   const pepperoniFlavor = new Flavor("Pepperoni");
-  pepperoniFlavor.toppings = new Toppings([]);
+  pepperoniFlavor.toppings = new Toppings();
   pepperoniFlavor.addTopping("parmesan");
   pepperoniFlavor.addTopping("pepperoni");
 
   const sausageFlavor = new Flavor("Sausage");
-  sausageFlavor.toppings = new Toppings([]);
+  sausageFlavor.toppings = new Toppings();
   sausageFlavor.addTopping("parmesan");
   sausageFlavor.addTopping("pepperoni");
   sausageFlavor.addTopping("Sausage");
 
   const hawaiianFlavor = new Flavor("Hawaiian");
-  hawaiianFlavor.toppings = new Toppings([]);
+  hawaiianFlavor.toppings = new Toppings();
   hawaiianFlavor.addTopping("parmesan");
   hawaiianFlavor.addTopping("pineapple");
   hawaiianFlavor.addTopping("canadian bacon");
 
   const buffaloFlavor = new Flavor("Buffalo Chicken");
-  buffaloFlavor.toppings = new Toppings([]);
+  buffaloFlavor.toppings = new Toppings();
   buffaloFlavor.addTopping("parmesan");
   buffaloFlavor.addTopping("chicken");
   buffaloFlavor.addTopping("peppers");
 
   const flavors = [cheeseFlavor, pepperoniFlavor, sausageFlavor, hawaiianFlavor, buffaloFlavor];
   flavors.forEach(function(flav) {
-    pList.addFlavor(flav);
+    fList.addFlavor(flav);
   });
 
   return fList;
@@ -132,15 +168,34 @@ function cardHoverColor() {
 }
 
 function orderHoverColor() {
-  document.getElementById("order-btn").addEventListener("mouseenter", function(event) {
+  document.getElementById("order-btn").addEventListener("mouseleave", function(event) {
     event.target.classList.remove("bg-my-light");
-    event.target.classList.add("bg-danger");
+    event.target.classList.add("btn-danger");
     event.target.classList.add("text-light");
   });
-  document.getElementById("order-btn").addEventListener("mouseleave", function(event) {
-    event.target.classList.remove("bg-danger");
+  document.getElementById("order-btn").addEventListener("mouseenter", function(event) {
+    event.target.classList.remove("btn-danger");
     event.target.classList.remove("text-light");
     event.target.classList.add("bg-my-light");
+  });
+}
+
+function handleOrders() {
+  const standardFlavors = getFlavorList(); 
+  document.getElementById("order-btn").addEventListener("click", function() {
+    const fName = document.getElementById("flavor-display-box").value;
+    const fSize = document.getElementById("size-display-box").value;
+    let pFlavor = standardFlavors.flavors[fName];
+    const extras = document.querySelectorAll("input.form-check-input:checked");
+    let extraArray = [];
+    for (let e = 0; e < extras.length; e++) {
+      extraArray.push(extras.item(e));
+    }
+    extraArray.forEach(function(ex) {
+      pFlavor = addPizzaTopping(pFlavor, ex.value);
+    });
+    const pToppings = [...pFlavor.toppings.list];
+    const newPizza = new Pizza(pFlavor, pToppings, fSize);
   });
 }
 
@@ -149,4 +204,5 @@ addEventListener("load", function() {
   cardHoverColor();
   orderHoverColor();
   formClicks();
+  handleOrders();
 });

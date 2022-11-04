@@ -1,6 +1,7 @@
 /* Global */
 :root {
   --my-light: #e7e9eb;
+  --primary: var(--my-light);
 }
 
 /* Elements */
@@ -10,8 +11,40 @@ label {
   margin-bottom: 2vh;
 }
 
+input {
+  accent-color: var(--my-light);
+}
+
+select option:active {
+  background-color: red;
+}
 /* Classes */
 
 .bg-my-light {
   background-color: var(--my-light);
+}
+
+.display-form {
+  width: 25vw;
+  margin: auto;
+}
+
+.form-control:focus {
+  border-color: var(--my-light);
+  box-shadow: inset 0 1px 1px var(--my-light), 0 0 8px var(--my-light);
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.active {
+  background-color: var(--my-light);
+  color: black;
+}
+
+/* IDS */
+
+#flavor-dropdown {
+  width: 8vw;
 }

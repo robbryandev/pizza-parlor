@@ -1,7 +1,7 @@
 // Business
 
 function Toppings(topArray) {
-  this.validToppings = ["parmesan", "pepperoni", "pineapple", "chicken", "sausage", "refried_beans", "pickles"];
+  this.validToppings = ["parmesan", "pepperoni", "pineapple", "chicken", "sausage", "canadian_bacon", "peppers", "chicken"];
   let topList = [];
   topArray.forEach(function(top) {
     const filterTop = String(top).trim().toLocaleLowerCase().replaceAll(" ", "_");
@@ -38,46 +38,96 @@ function Pizza(flavor, toppings, size) {
   this.name = flavor.name;
   this.toppings = [...flavor.toppings].concat([...toppings.list]);
   this.size = size;
+  this.price = (parseFloat(this.size) + this.toppings.length).toFixed(2);
 }
 
-function getPizzas() {
-  const pList = new FlavorList();
+function getFlavorList() {
+  let fList = new FlavorList();
+
+  const cheeseFlavor = new Flavor("Cheese");
+  cheeseFlavor.toppings = new Toppings([]);
+  cheeseFlavor.addTopping("parmesan");
 
   const pepperoniFlavor = new Flavor("Pepperoni");
-  pepperoniFlavor.addTopping("pepperoni");
+  pepperoniFlavor.toppings = new Toppings([]);
   pepperoniFlavor.addTopping("parmesan");
+  pepperoniFlavor.addTopping("pepperoni");
 
-  const flavors = [pepperoniFlavor];
+  const sausageFlavor = new Flavor("Sausage");
+  sausageFlavor.toppings = new Toppings([]);
+  sausageFlavor.addTopping("parmesan");
+  sausageFlavor.addTopping("pepperoni");
+  sausageFlavor.addTopping("Sausage");
+
+  const hawaiianFlavor = new Flavor("Hawaiian");
+  hawaiianFlavor.toppings = new Toppings([]);
+  hawaiianFlavor.addTopping("parmesan");
+  hawaiianFlavor.addTopping("pineapple");
+  hawaiianFlavor.addTopping("canadian bacon");
+
+  const buffaloFlavor = new Flavor("Buffalo Chicken");
+  buffaloFlavor.toppings = new Toppings([]);
+  buffaloFlavor.addTopping("parmesan");
+  buffaloFlavor.addTopping("chicken");
+  buffaloFlavor.addTopping("peppers");
+
+  const flavors = [cheeseFlavor, pepperoniFlavor, sausageFlavor, hawaiianFlavor, buffaloFlavor];
   flavors.forEach(function(flav) {
     pList.addFlavor(flav);
-  })
+  });
+
+  return fList;
 }
 
 // Ui
 
-function cardHoverColor() {
-  document.querySelectorAll(".card").forEach(function(card) {
-    card.addEventListener("mouseenter", function(event) {
-      setTimeout(function() {
-        event.target.classList.remove("bg-my-light");
-        event.target.classList.add("bg-danger");
-      }, 50);
-    });
-    card.addEventListener("mouseleave", function(event) {
-      setTimeout(function() {
-        event.target.classList.remove("bg-danger");
-        event.target.classList.add("bg-my-light");
-      }, 50);
-    })
-  });
-}
-
-addEventListener("load", function() {
-  cardHoverColor();
+function navbarLinks() {
   this.document.getElementById("flavor-link").addEventListener("click", function() {
     document.getElementById("flavor-div").scrollIntoView();
   });
   this.document.getElementById("order-link").addEventListener("click", function() {
     document.getElementById("order-div").scrollIntoView();
   });
+}
+
+function cardHoverColor() {
+  document.querySelectorAll(".card").forEach(function(card) {
+    card.addEventListener("click", function() {
+      document.getElementById("flavor-display-box").value = card.childNodes[1].childNodes[1].innerText;
+      document.getElementById("order-btn").scrollIntoView();
+    });
+    card.addEventListener("mouseenter", function(event) {
+      setTimeout(function() {
+        event.target.classList.remove("bg-my-light");
+        event.target.classList.add("bg-danger");
+        event.target.classList.add("text-light");
+      }, 50);
+    });
+    card.addEventListener("mouseleave", function(event) {
+      setTimeout(function() {
+        event.target.classList.remove("bg-danger");
+        event.target.classList.remove("text-light");
+        event.target.classList.add("bg-my-light");
+      }, 50);
+    })
+  });
+}
+
+function orderHoverColor() {
+  document.getElementById("order-btn").addEventListener("mouseenter", function(event) {
+    event.target.classList.remove("bg-my-light");
+    event.target.classList.add("bg-danger");
+    event.target.classList.add("text-light");
+  });
+  document.getElementById("order-btn").addEventListener("mouseleave", function(event) {
+    event.target.classList.remove("bg-danger");
+    event.target.classList.remove("text-light");
+    event.target.classList.add("bg-my-light");
+  });
+}
+
+addEventListener("load", function() {
+  navbarLinks();
+  cardHoverColor();
+  orderHoverColor();
 });

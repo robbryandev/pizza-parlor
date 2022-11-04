@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -89,96 +89,6 @@
             </div>
           </div>
         </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Pizza</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Pizza</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Pizza</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Pizza</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Pizza</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Pizza</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Pizza</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Pizza</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mt-3">
-          <div class="card bg-my-light">
-            <div class="card-body">
-              <h3 class="card-title">Pizza</h3>
-              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus illum deleniti, quasi
-                rem ratione a quia omnis, amet iure ex ipsam! Perferendis, totam placeat quam exercitationem nemo
-                inventore voluptatibus quia.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div id="order-div" class="mt-5">
@@ -187,7 +97,8 @@
       <form>
         <div class="form-group text-center">
           <label for="flavor-dropdown">Flavor</label>
-          <select name="pizza-flavor" id="flavor-dropdown" class="form-control text-center w-50 m-auto" data-dropup-auto="false">
+          <select name="pizza-flavor" id="flavor-dropdown" class="form-control text-center w-50 m-auto"
+            data-dropup-auto="false">
             <option value="Cheese">Cheese</option>
             <option value="Pepperoni">Pepperoni</option>
             <option value="Hawaiian">Hawaiian</option>
@@ -197,15 +108,48 @@
           </select>
           <br>
           <label for="add-topping-dropdown">Extra Toppings</label>
-          <select name="add-toppings" id="add-topping-dropdown" class="form-control text-center w-50 m-auto" data-dropup-auto="false" multiple>
-            <option value="Parmesan">Parmesan</option>
-            <option value="Pepperoni">Pepperoni</option>
-            <option value="Pineapple">Pineapple</option>
-            <option value="Chicken">Chicken</option>
-            <option value="Sausage">Sausage</option>
-            <option value="Refried Beans">Refried Beans</option>
-            <option value="Pickles">Pickles</option>
-          </select>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="Parmesan">
+              Parmesan
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="Pepperoni">
+              Pepperoni
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="Pineapple">
+              Pineapple
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="Chicken">
+              Chicken
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="Sausage">
+              Sausage
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="Refried Beans">
+              Refried Beans
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="Pickles">
+              Pickles
+            </label>
+          </div>
         </div>
       </form>
     </div>

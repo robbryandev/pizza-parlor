@@ -22,4 +22,10 @@ function cardHoverColor() {
 
 addEventListener("load", function() {
   cardHoverColor();
+  this.document.getElementById("flavor-link").addEventListener("click", function() {
+    document.getElementById("flavor-div").scrollIntoView();
+  });
+  this.document.getElementById("order-link").addEventListener("click", function() {
+    document.getElementById("order-div").scrollIntoView();
+  });
 });

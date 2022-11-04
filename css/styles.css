@@ -4,7 +4,11 @@
 }
 
 /* Elements */
-
+label {
+  font-weight: bold;
+  font-style: italic;
+  margin-bottom: 2vh;
+}
 
 /* Classes */
 

@@ -90,6 +90,24 @@ function navbarLinks() {
   });
 }
 
+function formClickChange(drop, display) {
+  const dropElements = document.getElementById(drop).children;
+  let dropArray = [];
+  for (let i = 0; i < dropElements.length; i++) {
+    dropArray.push(dropElements.item(i));
+  }
+  dropArray.forEach(function(child) {
+    child.addEventListener("click", function(event) {
+      document.getElementById(display).value = event.target.innerText;
+    });
+  });
+}
+
+function formClicks() {
+  formClickChange("flavor-dropdown", "flavor-display-box");
+  formClickChange("size-dropdown", "size-display-box");
+}
+
 function cardHoverColor() {
   document.querySelectorAll(".card").forEach(function(card) {
     card.addEventListener("click", function() {
@@ -130,4 +148,5 @@ addEventListener("load", function() {
   navbarLinks();
   cardHoverColor();
   orderHoverColor();
+  formClicks();
 });

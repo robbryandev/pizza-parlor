@@ -175,23 +175,28 @@ function orderHoverColor() {
 }
 
 function handleOrders() {
-  const standardFlavors = getFlavorList(); 
-  document.getElementById("order-btn").addEventListener("click", function() {
-    const fName = document.getElementById("flavor-display-box").value;
-    const fSize = document.getElementById("size-display-box").value;
-    let pFlavor = new Flavor(fName, standardFlavors.flavors[fName].list);
-    const extras = document.querySelectorAll("input.form-check-input:checked");
-    let extraArray = [];
-    for (let e = 0; e < extras.length; e++) {
-      extraArray.push(extras.item(e));
-    }
-    extraArray.forEach(function(ex) {
-      pFlavor.addTopping(ex.value);
-    });
-    const pToppings = [...pFlavor.toppings];
-    const newPizza = new Pizza(pFlavor, pToppings, fSize);
-    document.getElementById("end-div").createReceipts(newPizza);
+  const standardFlavors = getFlavorList();
+  const fName = document.getElementById("flavor-display-box").value;
+  const fSize = document.getElementById("size-display-box").value;
+  let pFlavor = new Flavor(fName, standardFlavors.flavors[fName].list);
+  const extras = document.querySelectorAll("input.form-check-input:checked");
+  let extraArray = [];
+  for (let e = 0; e < extras.length; e++) {
+    extraArray.push(extras.item(e));
+  }
+  extraArray.forEach(function(ex) {
+    pFlavor.addTopping(ex.value);
   });
+  const pToppings = [...pFlavor.toppings];
+  const newPizza = new Pizza(pFlavor, pToppings, fSize);
+  document.getElementById("end-div").createReceipts(newPizza);
+  setTimeout(function() {
+    document.getElementById("order").scrollIntoView();
+  }, 100);
+}
+
+function submitOrders() {
+  document.getElementById("order-btn").addEventListener("click", handleOrders);
 }
 
 HTMLDivElement.prototype.createReceipts = function(pizzaVar) {
@@ -276,5 +281,5 @@ addEventListener("load", function() {
   cardHoverColor();
   orderHoverColor();
   formClicks();
-  handleOrders();
+  submitOrders();
 });

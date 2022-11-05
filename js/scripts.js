@@ -41,19 +41,11 @@ function Flavor(name, toppings) {
 }
 
 Flavor.prototype.addTopping = function(topping) {
+  let refTop = this.toppings;
   const newTopping = String(topping).trim().toLocaleLowerCase().replaceAll(" ", "_");
   if (this.validToppings.includes(newTopping)) {
-    this.toppings.list.push(newTopping);
+    refTop.push(newTopping);
   }
-};
-
-function addPizzaTopping(flavorVar, topping) {
-  let newFlavorVar = flavorVar;
-  const newTopping = String(topping).trim().toLocaleLowerCase().replaceAll(" ", "_");
-  if (newFlavorVar.toppings.validToppings.includes(newTopping)) {
-    newFlavorVar.toppings.list.push(newTopping);
-  }
-  return newFlavorVar;
 };
 
 function Pizza(flavor, toppings, size) {
@@ -61,7 +53,7 @@ function Pizza(flavor, toppings, size) {
   this.toppings = [...toppings];
   this.size = size;
   let pSize;
-  switch (size) {
+  switch (size.trim()) {
     case "Small":
       pSize = "12";
       break;
@@ -73,36 +65,38 @@ function Pizza(flavor, toppings, size) {
       break;
     default:
       pSize = "15";
+      break;
   }
-  this.price = (parseFloat(pSize) + this.toppings.length).toFixed(2);
+  this.price = (parseFloat(pSize) + toppings.length).toFixed(2);
 }
 
 function getFlavorList() {
   let fList = new FlavorList();
+  let validTops = new Toppings().validToppings;
 
   const cheeseFlavor = new Flavor("Cheese");
-  cheeseFlavor.toppings = new Toppings();
+  cheeseFlavor.validToppings = validTops;
   cheeseFlavor.addTopping("parmesan");
 
   const pepperoniFlavor = new Flavor("Pepperoni");
-  pepperoniFlavor.toppings = new Toppings();
+  pepperoniFlavor.validToppings = validTops;
   pepperoniFlavor.addTopping("parmesan");
   pepperoniFlavor.addTopping("pepperoni");
 
   const sausageFlavor = new Flavor("Sausage");
-  sausageFlavor.toppings = new Toppings();
+  sausageFlavor.validToppings = validTops;
   sausageFlavor.addTopping("parmesan");
   sausageFlavor.addTopping("pepperoni");
   sausageFlavor.addTopping("Sausage");
 
   const hawaiianFlavor = new Flavor("Hawaiian");
-  hawaiianFlavor.toppings = new Toppings();
+  hawaiianFlavor.validToppings = validTops;
   hawaiianFlavor.addTopping("parmesan");
   hawaiianFlavor.addTopping("pineapple");
   hawaiianFlavor.addTopping("canadian bacon");
 
   const buffaloFlavor = new Flavor("Buffalo Chicken");
-  buffaloFlavor.toppings = new Toppings();
+  buffaloFlavor.validToppings = validTops;
   buffaloFlavor.addTopping("parmesan");
   buffaloFlavor.addTopping("chicken");
   buffaloFlavor.addTopping("peppers");
@@ -185,19 +179,97 @@ function handleOrders() {
   document.getElementById("order-btn").addEventListener("click", function() {
     const fName = document.getElementById("flavor-display-box").value;
     const fSize = document.getElementById("size-display-box").value;
-    let pFlavor = standardFlavors.flavors[fName];
+    let pFlavor = new Flavor(fName, standardFlavors.flavors[fName].list);
     const extras = document.querySelectorAll("input.form-check-input:checked");
     let extraArray = [];
     for (let e = 0; e < extras.length; e++) {
       extraArray.push(extras.item(e));
     }
     extraArray.forEach(function(ex) {
-      pFlavor = addPizzaTopping(pFlavor, ex.value);
+      pFlavor.addTopping(ex.value);
     });
-    const pToppings = [...pFlavor.toppings.list];
+    const pToppings = [...pFlavor.toppings];
     const newPizza = new Pizza(pFlavor, pToppings, fSize);
+    document.getElementById("end-div").createReceipts(newPizza);
   });
 }
+
+HTMLDivElement.prototype.createReceipts = function(pizzaVar) {
+  while (this.lastChild) {
+    this.removeChild(this.lastChild);
+  }
+
+  let pizzaName = pizzaVar.name;
+  let pizzaToppings = pizzaVar.toppings;
+  let receiptElements = [];
+  const ref = this;
+
+//   <h1 class="text-center" id="order">Here's your receipt!</h1>
+  let rHeader = document.createElement("h1");
+  rHeader.setAttribute("class", "text-center");
+  rHeader.setAttribute("id", "order");
+  rHeader.innerText = "Here's your receipt!";
+  receiptElements.push(rHeader);
+//   <hr class="w-75">
+  let hr = document.createElement("hr");
+  hr.setAttribute("class", "w-75");
+  receiptElements.push(hr);
+
+//   <h2 class="pb-2">Pizza: Pepperoni</h2>
+  let pizzaHeader = document.createElement("h2");
+  pizzaHeader.setAttribute("class", "pb-2");
+  pizzaHeader.innerText = `Pizza: ${pizzaName}`;
+  receiptElements.push(pizzaHeader);
+
+//   <h3 class="pb-2">Toppings</h3>
+  let toppingHeader = document.createElement("h3");
+  toppingHeader.setAttribute("class", "pb-2");
+  toppingHeader.innerText = "Toppings";
+  receiptElements.push(toppingHeader);
+  //   <ul class="list-group w-25 m-auto">
+  let topList = document.createElement("ul");
+  topList.setAttribute("class", "list-group w-25 m-auto");
+//     <li class="list-group-item">
+//       Parmesan
+//     </li>
+//     <li class="list-group-item">
+//       Pepperoni
+//     </li>
+//   </ul>
+  for (let p = 0; p < pizzaToppings.length; p++) {
+    let newTopping = document.createElement("li");
+    newTopping.setAttribute("class", "list-group-item");
+    let toppingName = pizzaToppings[p];
+    let toppingNameArray = toppingName.split("_");
+    let toppingWordOne = toppingNameArray[0].split("");
+    toppingWordOne[0] = toppingWordOne[0].toUpperCase();
+    toppingNameArray[0] = toppingWordOne.join("");
+    if (toppingNameArray.length === 2) {
+      let toppingWordTwo = toppingNameArray[1].split("");
+      toppingWordTwo[0] = toppingWordTwo[0].toUpperCase();
+      toppingNameArray[1] = toppingWordTwo.join("");
+    }
+    newTopping.innerText = toppingNameArray.join(" ");
+    topList.appendChild(newTopping);
+  }
+  
+  receiptElements.push(topList);
+  //   <br>
+  const br = document.createElement("br");
+  receiptElements.push(br);
+//   <h3>Size: Medium</h3>
+  let pizzaSize = document.createElement("h3");
+  pizzaSize.innerText = pizzaVar.size;
+  receiptElements.push(pizzaSize);
+//   <h3>Price: $17.00</h3>
+  let pizzaPrice = document.createElement("h3");
+  pizzaPrice.innerText = pizzaVar.price;
+  receiptElements.push(pizzaPrice);
+//
+  receiptElements.forEach(function(rec) {
+    ref.appendChild(rec);
+  });
+};
 
 addEventListener("load", function() {
   navbarLinks();

@@ -1,5 +1,6 @@
 // Business
 
+//Toppings Object constructur function
 function Toppings(topArray) {
   let topList = [];
   this.validToppings = ["parmesan", "pepperoni", "pineapple", "chicken", "sausage", "canadian_bacon", "peppers", "chicken"];
@@ -17,15 +18,18 @@ function Toppings(topArray) {
   this.list = topList;
 }
 
+// FlavorList Object constructur function
 function FlavorList() {
   this.flavors = {};
 }
 
+// FlavorList method to add a new Flavor
 FlavorList.prototype.addFlavor = function(flavorVar) {
   this.flavors[flavorVar.name] = {};
   this.flavors[flavorVar.name].toppings = flavorVar.toppings;
 };
 
+// Flavor Object constructur function
 function Flavor(name, toppings) {
   this.name = name;
   this.toppings = [];
@@ -40,6 +44,7 @@ function Flavor(name, toppings) {
   }
 }
 
+// Flavor method to add a new topping
 Flavor.prototype.addTopping = function(topping) {
   let refTop = this.toppings;
   const newTopping = String(topping).trim().toLocaleLowerCase().replaceAll(" ", "_");
@@ -48,6 +53,7 @@ Flavor.prototype.addTopping = function(topping) {
   }
 };
 
+// Pizza Object constructur function
 function Pizza(flavor, toppings, size) {
   this.name = flavor.name;
   this.toppings = [...toppings];
@@ -70,6 +76,7 @@ function Pizza(flavor, toppings, size) {
   this.price = (parseFloat(pSize) + toppings.length).toFixed(2);
 }
 
+// Creates all basic Flavors and puts them in a FlavorList
 function getFlavorList() {
   let fList = new FlavorList();
   let validTops = new Toppings().validToppings;
@@ -111,6 +118,7 @@ function getFlavorList() {
 
 // Ui
 
+// Controls the scrolling for the navbar links
 function navbarLinks() {
   this.document.getElementById("flavor-link").addEventListener("click", function() {
     document.getElementById("flavor-div").scrollIntoView();
@@ -120,6 +128,7 @@ function navbarLinks() {
   });
 }
 
+// Adds event listeners to form input groups to change display value of disabled input box
 function formClickChange(drop, display) {
   const dropElements = document.getElementById(drop).children;
   let dropArray = [];
@@ -133,11 +142,13 @@ function formClickChange(drop, display) {
   });
 }
 
+// sends input form ids to formClickChange
 function formClicks() {
   formClickChange("flavor-dropdown", "flavor-display-box");
   formClickChange("size-dropdown", "size-display-box");
 }
 
+// Changes color of pizza cards on mouse hover
 function cardHoverColor() {
   document.querySelectorAll(".card").forEach(function(card) {
     card.addEventListener("click", function() {
@@ -161,6 +172,7 @@ function cardHoverColor() {
   });
 }
 
+// Changes color of order button on mouse hover
 function orderHoverColor() {
   document.getElementById("order-btn").addEventListener("mouseleave", function(event) {
     event.target.classList.remove("bg-my-light");
@@ -174,6 +186,7 @@ function orderHoverColor() {
   });
 }
 
+// Creates a pizza from the order inputs and sends it to the receipt render method
 function handleOrders() {
   const standardFlavors = getFlavorList();
   const fName = document.getElementById("flavor-display-box").value;
@@ -195,10 +208,12 @@ function handleOrders() {
   }, 100);
 }
 
+// Adds event listener to submit orders
 function submitOrders() {
   document.getElementById("order-btn").addEventListener("click", handleOrders);
 }
 
+// HTMLDivElement method to create receipts when orders are submitted
 HTMLDivElement.prototype.createReceipts = function(pizzaVar) {
   while (this.lastChild) {
     this.removeChild(this.lastChild);
@@ -276,6 +291,7 @@ HTMLDivElement.prototype.createReceipts = function(pizzaVar) {
   });
 };
 
+// On page load
 addEventListener("load", function() {
   navbarLinks();
   cardHoverColor();

@@ -30,18 +30,11 @@ FlavorList.prototype.addFlavor = function(flavorVar) {
 };
 
 // Flavor Object constructur function
-function Flavor(name, toppings) {
+function Flavor(name) {
   this.name = name;
-  this.toppings = [];
-  this.validToppings = [];
-  if (toppings) {
-    this.toppings = [...toppings.list]
-    this.validToppings = toppings.validToppings;
-  } else {
-    let tmpTop = new Toppings();
-    this.toppings = [...tmpTop.list];
-    this.validToppings = tmpTop.validToppings;
-  }
+  let tmpTop = new Toppings();
+  this.toppings = [...tmpTop.list];
+  this.validToppings = tmpTop.validToppings;
 }
 
 // Flavor method to add a new topping

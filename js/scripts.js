@@ -33,16 +33,15 @@ FlavorList.prototype.addFlavor = function(flavorVar) {
 function Flavor(name) {
   this.name = name;
   let tmpTop = new Toppings();
-  this.toppings = [...tmpTop.list];
+  this.toppings = [];
   this.validToppings = tmpTop.validToppings;
 }
 
 // Flavor method to add a new topping
 Flavor.prototype.addTopping = function(topping) {
-  let refTop = this.toppings;
   const newTopping = String(topping).trim().toLocaleLowerCase().replaceAll(" ", "_");
   if (this.validToppings.includes(newTopping)) {
-    refTop.push(newTopping);
+    this.toppings.push(newTopping);
   }
 };
 
@@ -72,31 +71,25 @@ function Pizza(flavor, toppings, size) {
 // Creates all basic Flavors and puts them in a FlavorList
 function getFlavorList() {
   let fList = new FlavorList();
-  let validTops = new Toppings().validToppings;
 
   const cheeseFlavor = new Flavor("Cheese");
-  cheeseFlavor.validToppings = validTops;
   cheeseFlavor.addTopping("parmesan");
 
   const pepperoniFlavor = new Flavor("Pepperoni");
-  pepperoniFlavor.validToppings = validTops;
   pepperoniFlavor.addTopping("parmesan");
   pepperoniFlavor.addTopping("pepperoni");
 
   const sausageFlavor = new Flavor("Sausage");
-  sausageFlavor.validToppings = validTops;
   sausageFlavor.addTopping("parmesan");
   sausageFlavor.addTopping("pepperoni");
   sausageFlavor.addTopping("Sausage");
 
   const hawaiianFlavor = new Flavor("Hawaiian");
-  hawaiianFlavor.validToppings = validTops;
   hawaiianFlavor.addTopping("parmesan");
   hawaiianFlavor.addTopping("pineapple");
   hawaiianFlavor.addTopping("canadian bacon");
 
   const buffaloFlavor = new Flavor("Buffalo Chicken");
-  buffaloFlavor.validToppings = validTops;
   buffaloFlavor.addTopping("parmesan");
   buffaloFlavor.addTopping("chicken");
   buffaloFlavor.addTopping("peppers");
@@ -184,7 +177,12 @@ function handleOrders() {
   const standardFlavors = getFlavorList();
   const fName = document.getElementById("flavor-display-box").value;
   const fSize = document.getElementById("size-display-box").value;
-  let pFlavor = new Flavor(fName, standardFlavors.flavors[fName].list);
+  let pFlavor = new Flavor(fName);
+  let fList = standardFlavors.flavors[fName].toppings;
+  for (let pt = 0; pt < fList.length; pt++) {
+    console.log(fList);
+    pFlavor.addTopping(fList[pt]);
+  }
   const extras = document.querySelectorAll("input.form-check-input:checked");
   let extraArray = [];
   for (let e = 0; e < extras.length; e++) {

@@ -19,11 +19,15 @@
   <title>Pizza Parlor</title>
 </head>
 <body class="bg-light">
+  <!-- Main container -->
   <div class="container-fluid">
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
+      <!-- Navbar Title -->
       <a class="navbar-brand text-light" href="#">Pizza Time Pizza</a>
       <div class="navbar-item-list">
         <ul class="navbar-nav">
+          <!-- NavBar Links -->
           <li class="nav-item">
             <a id="flavor-link" href="#flavor-div" class="nav-link text-light pl-3">Flavors</a>
           </li>
@@ -36,10 +40,12 @@
     <br>
     <br>
     <br>
+    <!-- Flavor Section -->
     <div id="flavor-div" class="mt-5">
       <h1 class="text-center" id="flavors">Flavors</h1>
       <hr class="w-75">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4">
+        <!-- Flavor Cards -->
         <div class="col mt-3">
           <div class="card bg-my-light">
             <div class="card-body text-center">
@@ -125,13 +131,16 @@
         </div>
       </div>
     </div>
+    <!-- Order Section -->
     <div id="order-div" class="mt-5">
       <h1 class="text-center" id="order">Order</h1>
       <hr class="w-75">
       <form>
+        <!-- Order Form -->
         <div class="form-group text-center">
           <div class="input-group display-form">
             <div class="input-group-prepend">
+              <!-- Flavor Input -->
               <button class="btn btn-danger dropdown-toggle" type="button" id="flavor-btn" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 Flavor
@@ -149,6 +158,7 @@
           <br>
           <div class="input-group display-form">
             <div class="input-group-prepend">
+              <!-- Size Input -->
               <button class="btn btn-danger dropdown-toggle" type="button" id="size-btn" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 Size
@@ -162,6 +172,7 @@
             <input type="text" class="form-control" id="size-display-box" value="Medium" disabled>
           </div>
           <br>
+          <!-- Topping Checkboxes -->
           <label for="add-topping-dropdown">Extra Toppings</label>
           <div class="form-check">
             <label class="form-check-label">
@@ -212,6 +223,7 @@
         </div>
       </form>
     </div>
+    <!-- Receipt Area -->
     <div id="end-div" class="mt-5 text-center">
     </div>
   </div>
